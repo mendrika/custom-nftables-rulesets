@@ -1,0 +1,13 @@
+[Unit]
+Description=nftables rules at boot
+Documentation=https://wiki.nftables.org
+
+[Service]
+RemainAfterExit=yes
+Type=oneshot
+ExecStart=/usr/sbin/nft -f /etc/nftables/nftables.conf
+ExecReload=/usr/sbin/nft -f /etc/nftables/nftables.conf
+ExecStop=/usr/sbin/nft flush ruleset
+
+[Install]
+WantedBy=multi-user.target
